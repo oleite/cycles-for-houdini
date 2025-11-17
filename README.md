@@ -24,6 +24,9 @@ cd cycles-for-houdini
 python scripts/build.py Release "C:\Program Files\Side Effects Software\Houdini 21.0.512"
 ``` 
 
+4. Copy the `cycles.json` file to your `Documents/houdini21.0/packages/` folder.
+
+5. Done! Cycles should now be available within Houdini Solaris.
 
 ## Notes
 
