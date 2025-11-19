@@ -1,7 +1,7 @@
 # Cycles for Houdini
 
 Simple scripts for integrating the Cycles Hydra Delegate into Houdini.
-
+Experimental and work-in-progress.
 
 ## Windows Build
 
@@ -27,6 +27,22 @@ python scripts/build.py Release "C:\Program Files\Side Effects Software\Houdini 
 4. Copy the `cycles.json` file to your `Documents/houdini21.0/packages/` folder.
 
 5. Done! Cycles should now be available within Houdini Solaris.
+
+## Generating Shader HDAs
+
+1. Generate the shader description file with the `cycles.exe --list-nodes cycles_nodes.yaml` command;
+
+2. Place the generated `cycles_nodes.yaml` file in the `scripts/` folder;
+
+3. set the `HFS` and `HHP` environment variables to point to your Houdini installation and its Python libraries, then run the `cycles2hda.py` script:
+
+```sh
+set HFS=C:\Program Files\Side Effects Software\Houdini 21.0.512
+set HHP=%HFS%\houdini\python3.11libs
+python scripts/cycles2hda.py
+```
+
+4. Done. The generated HDAs will be placed in the `houdini/otls` folder.
 
 ## Notes
 
