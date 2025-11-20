@@ -1,8 +1,11 @@
 # Build artifacts
-houdini/
+houdini/dso/
+houdini/otls/
 cycles.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+/.vscode
+scripts/cycles_nodes.yaml

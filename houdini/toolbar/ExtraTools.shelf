@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+
+  <tool name="vop_mtlxsubnet" label="Cycles Material Builder" icon="BUTTONS_theme_light">
+    <toolMenuContext name="network">
+      <contextOpType>Vop/materialbuilder</contextOpType>
+    </toolMenuContext>
+    <toolSubmenu>Cycles</toolSubmenu>
+    <script scriptType="python"><![CDATA[
+import voptoolutils
+
+subnetNode = voptoolutils.genericTool(kwargs, "subnet", "cycles_material")
+for n in subnetNode.children():
+    n.destroy()
+
+mask = f"cycles {voptoolutils.UTILITY_NODES} {voptoolutils.SUBNET_NODES}"
+voptoolutils._addMtlSubnetParms(subnetNode, menu_mask=mask, render_context="cycles", folder_label="Cycles Material Builder")
+
+surfaceNode = subnetNode.createNode("cycles_principled_bsdf")
+outputNode = surfaceNode.createOutputNode("suboutput", "surface_output")
+outputNode.setInput(0, surfaceNode)
+outputNode.parm("name1").set("surface")
+
+subnetNode.layoutChildren()
+subnetNode.setMaterialFlag(True)
+
+]]></script>
+  </tool>
+</shelfDocument>
