@@ -1,3 +1,4 @@
 [submodule "cycles"]
 	path = cycles
 	url = https://github.com/oleite/cycles.git
+	branch = main
