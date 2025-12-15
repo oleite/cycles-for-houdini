@@ -28,6 +28,14 @@ python scripts/build.py Release "C:\Program Files\Side Effects Software\Houdini 
 
 5. Done! Cycles should now be available within Houdini Solaris.
 
+### GPU Support (CUDA / OptiX)
+
+1. Install the [NVIDIA CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive) (tested with 12.9);
+2. Set the `CUDA_ROOT` environment variable to point to your CUDA installation (default: `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9`);
+3. Install the [NVIDIA OptiX SDK](https://developer.nvidia.com/optix/downloads) (tested with 9.0.0);
+4. Set the `OPTIX_ROOT` environment variable to point to your OptiX installation (default: `C:\ProgramData\NVIDIA Corporation\OptiX SDK 9.0.0`);
+5. Re-run the build script as described above.
+
 ## Generating Shader HDAs
 
 1. Generate the shader description file with the `cycles.exe --list-nodes cycles_nodes.yaml` command;

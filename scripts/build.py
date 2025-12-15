@@ -10,6 +10,8 @@ ROOT_DIR = Path(__file__).parent.resolve().parent
 CYCLES_DIR = ROOT_DIR / "cycles"
 TARGET_DSO_DIR = ROOT_DIR / "houdini" / "dso"
 SOURCE_DSO_DIR = CYCLES_DIR / "install" / "houdini" / "dso"
+OPTIX_ROOT_DIR = os.getenv("OPTIX_ROOT", Path("C:/ProgramData/NVIDIA Corporation/OptiX SDK 9.0.0"))
+CUDA_ROOT_DIR = os.getenv("CUDA_ROOT", Path("C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9"))
 
 # Terminal Color Codes
 try:
@@ -25,6 +27,10 @@ except Exception:
     ALL_DONE = ""
     ERROR = ""
     RESET = ""
+
+
+def strpath(path):
+    return str(path).replace("\\", "/")
 
 
 def printSuccess(msg="    ...Done."):
@@ -118,6 +124,14 @@ def runBuildProcess(buildConfig, houdiniRoot):
             f"-DCMAKE_BUILD_TYPE={buildConfig}",
             "-DWITH_CYCLES_OSL=OFF",
             "-DWITH_CYCLES_ALEMBIC=OFF",
+            "-DWITH_CYCLES_DEVICE_CUDA=ON",
+            "-DWITH_CYCLES_DEVICE_OPTIX=ON",
+            "-DWITH_CYCLES_CUDA_BINARIES=ON",
+            "-DCYCLES_CUDA_BINARIES_ARCH=sm_75;sm_86;sm_89;sm_120",
+            "-DOPTIX_ROOT_DIR=" + strpath(OPTIX_ROOT_DIR),
+            "-DCYCLES_RUNTIME_OPTIX_ROOT_DIR=" + strpath(OPTIX_ROOT_DIR),
+            "-DCUDA_TOOLKIT_ROOT_DIR=" + strpath(CUDA_ROOT_DIR),
+            "-DOPTIX_INCLUDE_DIR=" + strpath(OPTIX_ROOT_DIR / "include"),
         ],
         cwd=CYCLES_DIR,
         step_name="CMake configuration",
